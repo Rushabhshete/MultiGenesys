@@ -68,24 +68,36 @@
 // };
 
 // export default EmployeeTable;
-
-import { Paper, IconButton, Box } from "@mui/material";
+import {
+  Paper,
+  IconButton,
+  Box,
+  Typography,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const EmployeeTable = ({ rows, loading, onEdit, onDelete }) => {
+import { NoRowsOverlay } from "../Helper/NoRowsOverlay";
+
+
+const EmployeeTable = ({
+  rows,
+  loading,
+  onEdit,
+  onDelete,
+  searchActive,
+}) => {
   const columns = [
     { field: "id", headerName: "ID", minWidth: 100 },
-    { field: "name", headerName: "Name", flex: 1, minWidth: 150 },
-    { field: "email", headerName: "Email", flex: 1, minWidth: 200 },
-    { field: "mobile", headerName: "Mobile", flex: 1, minWidth: 130 },
-    { field: "country", headerName: "Country", flex: 1, minWidth: 120 },
+    { field: "name", headerName: "Name", flex: 1 },
+    { field: "email", headerName: "Email", flex: 1 },
+    { field: "mobile", headerName: "Mobile", flex: 1 },
+    { field: "country", headerName: "Country", flex: 1 },
     {
       field: "actions",
       headerName: "Actions",
       sortable: false,
-      filterable: false,
       minWidth: 120,
       renderCell: (params) => (
         <Box>
@@ -95,7 +107,6 @@ const EmployeeTable = ({ rows, loading, onEdit, onDelete }) => {
           >
             <EditIcon fontSize="small" />
           </IconButton>
-
           <IconButton
             size="small"
             color="error"
@@ -122,6 +133,11 @@ const EmployeeTable = ({ rows, loading, onEdit, onDelete }) => {
         }}
         disableRowSelectionOnClick
         getRowId={(row) => row.id}
+        slots={{
+          noRowsOverlay: () => (
+            <NoRowsOverlay searchActive={searchActive} />
+          ),
+        }}
       />
     </Paper>
   );
