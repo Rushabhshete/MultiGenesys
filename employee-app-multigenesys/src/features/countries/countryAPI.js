@@ -1,6 +1,6 @@
 import api from "../../services/api";
 
-export const fetchCountriesAPI = async () => {
+export const getAllCountries = async () => {
   const response = await api.get("/country");
   return response.data;
 };

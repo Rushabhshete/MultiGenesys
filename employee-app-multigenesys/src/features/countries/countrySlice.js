@@ -1,33 +1,37 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchCountriesAPI } from "./countryAPI";
+import { getAllCountries } from "./countryAPI";
 
-// Async thunk
+/**
+ * Get all countries from API.
+ * Used to country dropdown in employee forms.
+ */
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
   async (_, thunkAPI) => {
     try {
-      const data = await fetchCountriesAPI();
-      return data;
+      return await getAllCountries();
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// Initial state
+/**
+ * Country slice state 
+ */
 const initialState = {
   list: [],
   loading: false,
   error: null,
 };
 
-// Slice
 const countrySlice = createSlice({
   name: "countries",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // get all country lifecycle
       .addCase(fetchCountries.pending, (state) => {
         state.loading = true;
         state.error = null;

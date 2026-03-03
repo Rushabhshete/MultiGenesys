@@ -9,8 +9,8 @@ function App() {
     <MainLayout>
       <Routes>
         <Route path="/" element={<EmployeePage />} />
-        <Route path="/add" element={<EmployeeFormPage />} />
-        <Route path="/edit/:id" element={<EmployeeFormPage />} />
+        <Route path="/createnewemployee" element={<EmployeeFormPage />} />
+        <Route path="/updateemployee/:id" element={<EmployeeFormPage />} />
            <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </MainLayout>

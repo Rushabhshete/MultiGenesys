@@ -23,15 +23,15 @@ const NAV_ITEMS = [
     label: "Employees",
     path: "/",
     icon: <PeopleIcon />,
-    // Active when on "/" or "/edit/:id"
+    // Active when on "/" or "/updateemployee/:id"
     matchPaths: ["/"],
-    startsWith: ["/edit"],
+    startsWith: ["/updateemployee"],
   },
   {
     label: "Add Employee",
-    path: "/add",
+    path: "/createnewemployee",
     icon: <PersonAddIcon />,
-    matchPaths: ["/add"],
+    matchPaths: ["/createnewemployee"],
     startsWith: [],
   },
 ];

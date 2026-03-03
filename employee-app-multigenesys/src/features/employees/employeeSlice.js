@@ -1,18 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  fetchEmployeesAPI,
-  fetchEmployeeByIdAPI,
-  deleteEmployeeAPI,
+  getAllEmployee,
+  getEmployeeById,
+  deleteEmployeeById,
   createEmployeeAPI,
-  updateEmployeeAPI,
+  updateEmployeeById,
 } from "./employeeAPI";
 
-// Fetch employees
+// --- ASYNC THUNKS ---
+// These handle all employee  API interactions.
+
+// Fetches the complete list of employees.
 export const fetchEmployees = createAsyncThunk(
   "employees/fetchEmployees",
   async (_, thunkAPI) => {
     try {
-      const data = await fetchEmployeesAPI();
+      const data = await getAllEmployee();
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -20,6 +23,7 @@ export const fetchEmployees = createAsyncThunk(
   },
 );
 
+// Creates a new employee.
 export const createEmployee = createAsyncThunk(
   "employees/createEmployee",
   async (data, thunkAPI) => {
@@ -32,11 +36,13 @@ export const createEmployee = createAsyncThunk(
   },
 );
 
+// Fetches one employee using ID.
+// used for the search functionality and pre-filling form when editing.
 export const fetchEmployeeById = createAsyncThunk(
   "employees/fetchEmployeeById",
   async (id, thunkAPI) => {
     try {
-      const data = await fetchEmployeeByIdAPI(id);
+      const data = await getEmployeeById(id);
       return data;
     } catch (error) {
       const message =
@@ -48,11 +54,12 @@ export const fetchEmployeeById = createAsyncThunk(
   },
 );
 
+// Updates an existing employee.
 export const updateEmployee = createAsyncThunk(
   "employees/updateEmployee",
   async ({ id, data }, thunkAPI) => {
     try {
-      const result = await updateEmployeeAPI(id, data);
+      const result = await updateEmployeeById(id, data);
       return result;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -60,12 +67,13 @@ export const updateEmployee = createAsyncThunk(
   },
 );
 
-// Delete employee
+// Delete an employee using ID.
 export const deleteEmployee = createAsyncThunk(
   "employees/deleteEmployee",
   async (id, thunkAPI) => {
     try {
-      await deleteEmployeeAPI(id);
+      await deleteEmployeeById(id);
+      // Return the ID to remove it from the state.
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -73,33 +81,41 @@ export const deleteEmployee = createAsyncThunk(
   },
 );
 
+// --- INITIAL STATE ---
 const initialState = {
-  list: [],
-  loading: false,
-  error: null,
-  searchResult: null,
-  searchLoading: false,
-  searchError: null,
+  list: [],    // Main employee list state
+  loading: false, // Tracks loading for the main list (get, create, update, delete)
+  error: null, // Tracks errors for the main list operations
+
+  // State for the search by ID
+  searchResult: null, // Holds the single employee object found
+  searchLoading: false, // Tracks loading specifically for the search
+  searchError: null, // Tracks errors specifically for the search
 };
 
+// --- SLICE DEFINITION ---
 const employeeSlice = createSlice({
   name: "employees",
   initialState,
-  reducers: {
+  // Regular reducers for synchronous state changes.
+    reducers: {
+    // Clears out any existing errors.
     clearEmployeeError: (state) => {
       state.error = null;
       state.searchError = null;
     },
+    // Resets the search state
     clearEmployeeSearch: (state) => {
       state.searchResult = null;
       state.searchError = null;
       state.searchLoading = false;
     },
   },
+  // Handlers for  async thunks.
   extraReducers: (builder) => {
     builder
 
-      // ===== FETCH =====
+      //  GET ALL EMPLOYEES 
       .addCase(fetchEmployees.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -113,11 +129,11 @@ const employeeSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ===== FETCH BY ID =====
+      //  GET EMPLOYEE BY ID (SEARCH) 
       .addCase(fetchEmployeeById.pending, (state) => {
         state.searchLoading = true;
         state.searchError = null;
-        state.searchResult = null;
+        state.searchResult = null; // Clear previous result
       })
       .addCase(fetchEmployeeById.fulfilled, (state, action) => {
         state.searchLoading = false;
@@ -129,7 +145,7 @@ const employeeSlice = createSlice({
         state.searchError = action.payload;
       })
 
-      // ===== CREATE =====
+      //  CREATE NEW EMPLOYEE 
       .addCase(createEmployee.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -143,13 +159,14 @@ const employeeSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ===== UPDATE =====
+      //  UPDATE EMPLOYEE 
       .addCase(updateEmployee.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(updateEmployee.fulfilled, (state, action) => {
         state.loading = false;
+        // Find the employee in the list and update it.
         const index = state.list.findIndex(
           (emp) => String(emp.id) === String(action.payload.id),
         );
@@ -165,14 +182,16 @@ const employeeSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ===== DELETE =====
+      //  DELETE EMPLOYEE 
       .addCase(deleteEmployee.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(deleteEmployee.fulfilled, (state, action) => {
         state.loading = false;
+        // Filter the deleted employee out of the main list.
         state.list = state.list.filter((emp) => emp.id !== action.payload);
+        // If we just deleted the searched employee, clear the search result.
         if (state.searchResult?.id?.toString() === action.payload?.toString()) {
           state.searchResult = null;
         }

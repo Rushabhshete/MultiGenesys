@@ -7,6 +7,23 @@ The application supports listing, searching, creating, editing, and deleting emp
 
 The focus of this implementation is reusable components, and a clear smart/dumb component structure.
 
+### Project Setup Instructions ###
+
+Clone the repository:
+--->git clone https://github.com/Rushabhshete/MultiGenesys.git
+--->cd employee-app-multigenesys
+--->npm install
+
+### Start the development server: ###
+
+---> npm run dev
+
+The application will run locally :  http://localhost:5173
+
+Run unit tests using:
+--->npm test
+
+
 #### Tech Stack ####
 
 ---React (latest)
@@ -19,8 +36,8 @@ The focus of this implementation is reusable components, and a clear smart/dumb 
 
 #### Key Features ####
 
---Employee listing with pagination
---Search by Employee ID (explicit button-triggered search)
+--Employee list with pagination
+--Search by Employee ID (onClick button-trigger search)
 --Add / Edit employee with validation
 --Delete with confirmation dialog
 --Custom empty states (no data / search not found)
@@ -30,19 +47,12 @@ The focus of this implementation is reusable components, and a clear smart/dumb 
 #### Structure ####
 
 Smart Components: Handle Redux and API interaction (e.g:- EmployeeListPage,EmployeeFormPage)
-
 Dumb Components: Purely UI  (e.g., EmployeeTable, EmployeeForm)
-
 Redux slice manages list, loading, and error states using createAsyncThunk
-
 Reusable common components for dialogs, snackbar, and empty overlays
-
 The design follows a clean separation of codes and avoids direct API logic inside UI components.
 
-#### Running the Project ####
-npm install
-npm run dev
-npm test
+
 
 #### Notes ####
 

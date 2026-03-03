@@ -104,7 +104,7 @@ const EmployeeListPage = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit/${id}`);
+    navigate(`/updateemployee/${id}`);
   };
 
   const handleDelete = (id) => {
@@ -207,7 +207,7 @@ const EmployeeListPage = () => {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => navigate("/add")}
+          onClick={() => navigate("/createnewemployee")}
           sx={{
             width: { xs: "100%", sm: "auto" },
           }}
