@@ -84,7 +84,7 @@ const EmployeeForm = ({
                   fullWidth
                   label="Full Name"
                   name="name"
-                  placeholder="e.g. Rushabh Shah"
+                  placeholder="e.g. Rushabh Shete"
                   value={values.name}
                   onChange={handleChange}
                   required
