@@ -17,8 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const drawerWidth = 230;
 
-// FIX: Route config defined here (single source of truth for Sidebar)
-const NAV_ITEMS = [
+const Sidebar_Items = [
   {
     label: "Employees",
     path: "/",
@@ -74,7 +73,7 @@ const Sidebar = ({ mobileOpen, onMobileClose }) => {
 
       <Box sx={{ px: 1 }}>
         <List disablePadding>
-          {NAV_ITEMS.map((item) => {
+          {Sidebar_Items.map((item) => {
             const active = isActive(item);
             return (
               <ListItemButton

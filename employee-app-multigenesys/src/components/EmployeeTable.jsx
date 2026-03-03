@@ -105,7 +105,7 @@ const EmployeeTable = ({
           ),
         }}
         sx={{
-      minHeight: 400, // ✅ Important
+      minHeight: 400, 
     }}
       />
     </Paper>

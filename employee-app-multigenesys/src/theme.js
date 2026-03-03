@@ -61,7 +61,7 @@ const theme = createTheme({
           "&.Mui-focused": {
             backgroundColor: "#3498db",
             color: "#fff",
-            padding: "0 12px",
+            padding: "0 6px",
             borderRadius: 12,
           },
         },
@@ -82,7 +82,7 @@ MuiDataGrid: {
     },
 
     columnHeaders: {
-      backgroundColor: "#6495ED !important", // force cornflower
+      backgroundColor: "#6495ED !important", 
       color: "#ffffff",
     },
 

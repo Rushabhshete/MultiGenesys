@@ -26,7 +26,7 @@ const Header = ({ onMenuClick }) => {
           justifyContent: "space-between",
         }}
       >
-        {/* Left Section */}
+        {/* responsive menu for smaller device */}
         <Box display="flex" alignItems="center" gap={1.5}>
           <Tooltip title="Open menu" arrow>
             <IconButton
@@ -40,7 +40,6 @@ const Header = ({ onMenuClick }) => {
             </IconButton>
           </Tooltip>
 
-          {/* Logo + Name Clickable */}
           <Box
             display="flex"
             alignItems="center"
@@ -66,20 +65,17 @@ const Header = ({ onMenuClick }) => {
           </Box>
         </Box>
 
-        {/* Center Section */}
         <Typography
           variant="subtitle1"
           fontWeight={600}
           sx={{ display: { xs: "none", md: "block" } }}
-              color="white"
-
+          color="white"
         >
           Employee Management System
         </Typography>
 
-        {/* Right Section */}
         <Tooltip title="Account" arrow>
-          <IconButton sx={{color:"white"}} aria-label="account">
+          <IconButton sx={{ color: "white" }} aria-label="account">
             <AccountCircle />
           </IconButton>
         </Tooltip>

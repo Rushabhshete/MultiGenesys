@@ -13,7 +13,7 @@ import { fetchCountries } from "../features/countries/countrySlice";
 
 import { useState } from "react";
 import AppSnackbar from "../common/AppSnackbar";
-
+//smart employee form page 
 const EmployeeFormPage = () => {
   const { id } = useParams();
   const isEditMode = Boolean(id);

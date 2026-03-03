@@ -3,7 +3,6 @@ import {
   TextField,
   Button,
   Paper,
-  Typography,
   Box,
   CircularProgress,
   Autocomplete,
@@ -210,7 +209,7 @@ const EmployeeForm = ({
                     variant="contained"
                     size="medium"
                     disabled={loading}
-                    sx={{ px: 4, borderRadius: 2,color:"white" }}
+                    sx={{ px: 4, borderRadius: 2, color: "white" }}
                   >
                     {loading ? (
                       <CircularProgress size={24} color="inherit" />

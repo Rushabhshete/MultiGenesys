@@ -26,7 +26,6 @@ const EmployeeListPage = () => {
     error,
     searchResult,
     searchLoading,
-    searchError,
   } = useSelector((state) => state.employees);
   const countries = useSelector((state) => state.countries.list);
   const [snackbar, setSnackbar] = useState({
@@ -58,7 +57,10 @@ const EmployeeListPage = () => {
   }, [dispatch, countries.length]);
 
   const countryNameById = useMemo(
-    () => new Map(countries.map((country) => [String(country.id), country.country])),
+    () =>
+      new Map(
+        countries.map((country) => [String(country.id), country.country]),
+      ),
     [countries],
   );
 
@@ -66,7 +68,10 @@ const EmployeeListPage = () => {
     () =>
       employees.map((employee) => ({
         ...employee,
-        country: countryNameById.get(String(employee.country)) || employee.country || "-",
+        country:
+          countryNameById.get(String(employee.country)) ||
+          employee.country ||
+          "-",
       })),
     [employees, countryNameById],
   );
@@ -237,18 +242,18 @@ const EmployeeListPage = () => {
       />
 
       <AppSnackbar
-  open={snackbar.open || Boolean(error)} 
-  message={snackbar.open ? snackbar.message : error || ""}
-  severity={snackbar.open ? snackbar.severity : "error"}
-  onClose={() => {
-    if (snackbar.open) {
-      setSnackbar((prev) => ({ ...prev, open: false }));
-    }
-    if (error) {
-      dispatch(clearEmployeeError());
-    }
-  }}
-/>
+        open={snackbar.open || Boolean(error)}
+        message={snackbar.open ? snackbar.message : error || ""}
+        severity={snackbar.open ? snackbar.severity : "error"}
+        onClose={() => {
+          if (snackbar.open) {
+            setSnackbar((prev) => ({ ...prev, open: false }));
+          }
+          if (error) {
+            dispatch(clearEmployeeError());
+          }
+        }}
+      />
     </Box>
   );
 };
