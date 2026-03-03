@@ -5,6 +5,11 @@ export const fetchEmployeesAPI = async () => {
   return response.data;
 };
 
+export const fetchEmployeeByIdAPI = async (id) => {
+  const response = await api.get(`/employee/${id}`);
+  return response.data;
+};
+
 export const deleteEmployeeAPI = async (id) => {
   await api.delete(`/employee/${id}`);
   return id;

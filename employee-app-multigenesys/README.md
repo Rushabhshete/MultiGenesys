@@ -1,16 +1,58 @@
-# React + Vite
+MultiGenesys – Frontend Assignment (React)
+#### Overview ####
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a  Employee Management technical Assignment built using React, Redux Toolkit, and Material UI.
 
-Currently, two official plugins are available:
+The application supports listing, searching, creating, editing, and deleting employees while maintaining clean state management using Redux and component separation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The focus of this implementation is reusable components, and a clear smart/dumb component structure.
 
-## React Compiler
+#### Tech Stack ####
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---React (latest)
+---Redux Toolkit
+---React Router
+---Material UI + MUI DataGrid
+---Axios
+---Formik + Yup
+---Jest + React Testing Library
 
-## Expanding the ESLint configuration
+#### Key Features ####
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+--Employee listing with pagination
+--Search by Employee ID (explicit button-triggered search)
+--Add / Edit employee with validation
+--Delete with confirmation dialog
+--Custom empty states (no data / search not found)
+--Snackbar feedback for user actions
+--Responsive layout
+
+#### Structure ####
+
+Smart Components: Handle Redux and API interaction (e.g:- EmployeeListPage,EmployeeFormPage)
+
+Dumb Components: Purely UI  (e.g., EmployeeTable, EmployeeForm)
+
+Redux slice manages list, loading, and error states using createAsyncThunk
+
+Reusable common components for dialogs, snackbar, and empty overlays
+
+The design follows a clean separation of codes and avoids direct API logic inside UI components.
+
+#### Running the Project ####
+npm install
+npm run dev
+npm test
+
+#### Notes ####
+
+**Search is controlled and executed only on button click.
+**Delete operations update state immediately after success.
+**Empty and error states are explicitly handled.
+
+
+
+Code: -
+Rushabh Shete
+rushabhshete188@gmail.com
+Frontend Assignment – MultiGenesys -> employee management assignment
