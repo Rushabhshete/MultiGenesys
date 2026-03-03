@@ -7,8 +7,8 @@ const Header = ({ onMenuClick }) => (
       <IconButton
         color="inherit"
         edge="start"
-        onClick={onMenuClick}
-        sx={{ display: { md: "none" }, mr: 1,color:"white" }}
+        onClick={onMenuClick}        
+        sx={{ display: { md: "none" }, mr: 1 }}
         aria-label="open navigation"
         
       >

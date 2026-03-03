@@ -151,7 +151,7 @@ const EmployeeListPage = () => {
         display="flex"
         flexWrap="wrap"
         gap={2}
-        mb={2}
+        mt={2}
         alignItems="center"
         justifyContent="space-between"
       >
@@ -187,7 +187,6 @@ const EmployeeListPage = () => {
               size="small"
               onClick={handleSearch}
               disabled={!searchId.trim()}
-              sx={{color:"white"}}
             >
               Search
             </Button>
@@ -211,7 +210,6 @@ const EmployeeListPage = () => {
           onClick={() => navigate("/add")}
           sx={{
             width: { xs: "100%", sm: "auto" },
-            color:"white"
           }}
           size="small"
         >
@@ -239,18 +237,18 @@ const EmployeeListPage = () => {
       />
 
       <AppSnackbar
-        open={snackbar.open || Boolean(error) || Boolean(searchError)}
-        message={snackbar.open ? snackbar.message : error || searchError || ""}
-        severity={snackbar.open ? snackbar.severity : "error"}
-        onClose={() => {
-          if (snackbar.open) {
-            setSnackbar((prev) => ({ ...prev, open: false }));
-          }
-          if (error || searchError) {
-            dispatch(clearEmployeeError());
-          }
-        }}
-      />
+  open={snackbar.open || Boolean(error)} 
+  message={snackbar.open ? snackbar.message : error || ""}
+  severity={snackbar.open ? snackbar.severity : "error"}
+  onClose={() => {
+    if (snackbar.open) {
+      setSnackbar((prev) => ({ ...prev, open: false }));
+    }
+    if (error) {
+      dispatch(clearEmployeeError());
+    }
+  }}
+/>
     </Box>
   );
 };

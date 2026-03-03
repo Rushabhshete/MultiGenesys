@@ -150,11 +150,13 @@ const employeeSlice = createSlice({
       })
       .addCase(updateEmployee.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.list.findIndex((emp) => emp.id === action.payload.id);
+        const index = state.list.findIndex(
+          (emp) => String(emp.id) === String(action.payload.id),
+        );
         if (index !== -1) {
           state.list[index] = action.payload;
         }
-        if (state.searchResult?.id === action.payload.id) {
+        if (String(state.searchResult?.id) === String(action.payload.id)) {
           state.searchResult = action.payload;
         }
       })
@@ -182,5 +184,6 @@ const employeeSlice = createSlice({
   },
 });
 
-export const { clearEmployeeError, clearEmployeeSearch } = employeeSlice.actions;
+export const { clearEmployeeError, clearEmployeeSearch } =
+  employeeSlice.actions;
 export default employeeSlice.reducer;
