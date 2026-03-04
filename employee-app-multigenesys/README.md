@@ -15,11 +15,8 @@ Clone the repository:
 --->npm install
 
 ### Start the development server: ###
-
 ---> npm run dev
-
 The application will run locally :  http://localhost:5173
-
 Run unit tests using:
 --->npm test
 

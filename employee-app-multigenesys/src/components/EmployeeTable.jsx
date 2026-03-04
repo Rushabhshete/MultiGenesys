@@ -90,7 +90,7 @@ const EmployeeTable = ({
         rows={rows}
         columns={columns}
         loading={loading}
-        pageSizeOptions={[5, 10, 20]}
+        pageSizeOptions={[5, 10, 20,50,100]}
         initialState={{
           pagination: { paginationModel: { pageSize: 10, page: 0 } },
         }}
